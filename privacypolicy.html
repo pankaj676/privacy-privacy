@@ -28,377 +28,220 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+<body  class="w-full min-h-dvh overflow-x-hidden overflow-y-auto flex flex-col justify-between p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 text-slate-300">
 
-    <!-- Top Announcement / Header Banner -->
-    <header class="bg-indigo-600 dark:bg-indigo-900 text-white py-3 px-4 text-center text-sm font-medium shadow-sm transition-colors">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
-            <div class="flex items-center space-x-2 mx-auto sm:mx-0">
-                <i class="fa-solid fa-shield-halved text-indigo-200"></i>
-                <span>Your Trust & Privacy Matter. Last Updated: <strong class="underline">October 27, 2026</strong></span>
-            </div>
-            <div class="hidden sm:flex items-center space-x-4 text-xs text-indigo-200">
-                <span>Compliance: GDPR, CCPA, HIPAA Ready</span>
-            </div>
-        </div>
+    <!-- Top Navigation / Header -->
+    <header class="w-full max-w-5xl mx-auto mb-8 flex items-center justify-between border-b border-slate-800 pb-4">
+        <a th:href="@{/home}" class="flex items-center space-x-3">
+            <img th:src="@{/resources/images/logo/primes.png}" alt="logo" class="h-10 w-auto object-contain" />
+        </a>
+        <a th:href="@{/home}" class="text-xs sm:text-sm font-semibold text-blue-400 hover:text-blue-300 transition flex items-center space-x-2">
+            <i class="fa fa-arrow-left"></i>
+            <span>Back</span>
+        </a>
     </header>
 
-    <!-- Main Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md font-bold text-lg">
-                    <i class="fa-solid fa-cube"></i>
-                </div>
-                <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">NexusCorp</span>
-            </div>
-
-            <!-- Search Bar in Header -->
-            <div class="hidden md:flex items-center flex-1 max-w-md mx-8 relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                    <i class="fa-solid fa-search"></i>
-                </span>
-                <input type="text" id="policySearch" placeholder="Search privacy terms (e.g., cookies, data, rights)..." 
-                    class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 dark:focus:border-indigo-400 rounded-full text-sm outline-none transition-all">
-            </div>
-
-            <div class="flex items-center space-x-3">
-                <!-- Dark Mode Toggle -->
-                <button id="themeToggle" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="Toggle Dark/Light Mode">
-                    <i class="fa-solid fa-moon dark:hidden"></i>
-                    <i class="fa-solid fa-sun hidden dark:block"></i>
-                </button>
-                
-                <!-- Print / Export Button -->
-                <button onclick="window.print()" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-sm font-medium transition-colors">
-                    <i class="fa-solid fa-print"></i>
-                    <span>Print PDF</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Search Bar View -->
-    <div class="md:hidden px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-        <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                <i class="fa-solid fa-search"></i>
-            </span>
-            <input type="text" id="mobilePolicySearch" placeholder="Search privacy terms..." 
-                class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-full text-sm outline-none">
-        </div>
-    </div>
-
-    <!-- Hero Header Section -->
-    <section class="bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-4">Legal Document</span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">Privacy Policy</h1>
-            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                We respect your privacy and are committed to protecting your personal data. This policy outlines our collection, use, and security protocols.
-            </p>
-            <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-                <div class="flex items-center space-x-1.5"><i class="fa-regular fa-clock text-indigo-500"></i><span>Read time: 5 mins</span></div>
-                <div class="flex items-center space-x-1.5"><i class="fa-solid fa-globe text-indigo-500"><span>Global Applicability</span></div>
-                <div class="flex items-center space-x-1.5"><i class="fa-solid fa-check-circle text-indigo-500"><span>Verified Compliant</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content & Sticky Sidebar Layout -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Main Content Container -->
+    <main class="w-full max-w-5xl mx-auto bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl lg:rounded-3xl shadow-2xl p-6 sm:p-10 lg:p-12 space-y-8">
         
-        <!-- Sticky Table of Contents Sidebar -->
-        <aside class="hidden lg:block lg:col-span-3">
-            <div class="sticky top-24 bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                <h3 class="font-bold text-slate-900 dark:text-white text-sm uppercase tracking-wider mb-4 flex items-center space-x-2">
-                    <i class="fa-solid fa-list-ul text-indigo-500"></i>
-                    <span>Table of Contents</span>
-                </h3>
-                <nav id="tocNav" class="space-y-1.5 text-sm">
-                    <a href="#section-1" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">1. Information We Collect</a>
-                    <a href="#section-2" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">2. How We Use Data</a>
-                    <a href="#section-3" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">3. Cookies & Tracking</a>
-                    <a href="#section-4" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">4. Data Sharing & Disclosure</a>
-                    <a href="#section-5" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">5. Your Privacy Rights</a>
-                    <a href="#section-6" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">6. Security Measures</a>
-                    <a href="#section-7" class="toc-link block py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">7. Contact Information</a>
-                </nav>
+        <!-- Page Title -->
+        <div class="border-b border-slate-800/80 pb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">Privacy Policy</h1>
+            <p class="text-xs sm:text-sm text-slate-400">RTIS Device Monitoring Dashboard / Mobile App &bull; Centre For Railway Information Systems (CRIS)</p>
+        </div>
 
-                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
-                    <button id="downloadMarkdown" class="w-full py-2 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center justify-center space-x-2 transition-colors">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Download Raw Text</span>
-                    </button>
+        <!-- Sections -->
+        <section class="space-y-8 text-sm sm:text-base leading-relaxed text-slate-300">
+
+            <!-- 1. Policy Identification and Version Control -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">1. Policy Identification and Version Control</h2>
+                <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/40">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <tbody>
+                            <tr class="border-b border-slate-800/80">
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 w-1/3 bg-slate-900/50">Application Name</td>
+                                <td class="p-3 sm:p-4 text-slate-200">RTIS Device Monitoring Dashboard / Mobile App</td>
+                            </tr>
+                            <tr class="border-b border-slate-800/80">
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 bg-slate-900/50">Responsible Organization</td>
+                                <td class="p-3 sm:p-4 text-slate-200">Centre for Railway Information Systems (CRIS)</td>
+                            </tr>
+                            <tr class="border-b border-slate-800/80">
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 bg-slate-900/50">Policy Version</td>
+                                <td class="p-3 sm:p-4 text-slate-200">2.0</td>
+                            </tr>
+                            <tr class="border-b border-slate-800/80">
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 bg-slate-900/50">Effective Date</td>
+                                <td class="p-3 sm:p-4 text-slate-200">October 26, 2026</td>
+                            </tr>
+                            <tr class="border-b border-slate-800/80">
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 bg-slate-900/50">Last Updated</td>
+                                <td class="p-3 sm:p-4 text-slate-200"><span th:text="${T(java.time.LocalDate).now()}">October 26, 2026</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 sm:p-4 font-semibold text-slate-400 bg-slate-900/50">Previous Version</td>
+                                <td class="p-3 sm:p-4 text-slate-200">Not Applicable</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </aside>
 
-        <!-- Main Content Core Area -->
-        <main class="lg:col-span-9 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-10">
+            <!-- 2. Introduction and Scope -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">2. Introduction and Scope</h2>
+                <p class="mb-3">
+                    The RTIS Device Monitoring Dashboard/Mobile App is designed to monitor Real-Time Information System (RTIS) devices and the events received from these devices for the automatic acquisition of train movement data across Indian Railways.
+                </p>
+                <p class="mb-3">
+                    The application also provides authorized users with access to analytical, operational, and performance reports generated from the received events.
+                </p>
+                <p class="mb-3">
+                    This Privacy Policy describes the personal information collected or processed through the application, the purposes for which such information is used, applicable data-sharing practices, security safeguards, and the mechanism for raising privacy-related grievances.
+                </p>
+                <p>
+                    This policy applies to users accessing the RTIS Device Monitoring Dashboard/Mobile App and covers personal data processed for user authentication, access management, session management, and application security.
+                </p>
+            </div>
 
-            <!-- Intro Message Card -->
-            <div class="p-4 sm:p-6 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 flex items-start space-x-4">
-                <div class="p-3 bg-indigo-600 text-white rounded-xl shadow-md shrink-0">
-                    <i class="fa-solid fa-circle-info text-lg"></i>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-indigo-900 dark:text-indigo-300 mb-1">Quick Summary</h4>
-                    <p class="text-sm text-indigo-800/80 dark:text-indigo-200/80 leading-relaxed">
-                        We process your data purely to deliver and improve our services. We never sell your personal contact records to third-party data brokers. You retain full control over your stored records at all times.
-                    </p>
+            <!-- 3. Personal Data Collected and Its Purpose -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">3. Personal Data Collected and Its Purpose</h2>
+                <p class="mb-4">The application processes the following categories of information for authentication, access control, security, and operational purposes:</p>
+                
+                <div class="space-y-4 pl-2">
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.1 Identity Data</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">HRMS ID:</strong> Used to identify authorized users and facilitate access to the RTIS Dashboard through the Single Sign-On (SSO) service provided by CRIS.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.2 Contact Data</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">Mobile Number:</strong> Used for One-Time Password (OTP)-based authentication and the delivery of SMS alerts, where applicable.</li>
+                            <li><strong class="text-slate-300">Email Address:</strong> Not currently used by the application. It may be used in the future for email communications, subject to the implementation of the relevant functionality and applicable privacy requirements.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.3 Authentication and Access Log Data</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">Login ID:</strong> Used to identify users and support authentication and access control.</li>
+                            <li><strong class="text-slate-300">Authentication Records:</strong> Records associated with user authentication, where generated, are maintained for security and access-management purposes.</li>
+                            <li><strong class="text-slate-300">User Activity and Access Logs:</strong> Records of relevant user activities and access to the application are maintained in log files for security monitoring, auditing, troubleshooting, and accountability.</li>
+                        </ul>
+                        <p class="mt-2 text-slate-400 text-xs sm:text-sm">
+                            The personal information described above is processed for authentication, access management, security, and related application functions. It is not intended to be used for purposes unrelated to the operation of the application, except where required or permitted by applicable law or authorized policy.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.4 Cookies and Session Identifiers</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">Cookies:</strong> Used for secure, same-site connections, where applicable, to support secure communication between the user's browser and the application.</li>
+                            <li><strong class="text-slate-300">Session Identifiers:</strong> Used to maintain user sessions and preserve the application state across successive requests. These identifiers help ensure that access to authenticated functions remains associated with the relevant user session.</li>
+                        </ul>
+                        <p class="mt-2 text-slate-400 text-xs sm:text-sm">
+                            The application should use only those cookies and session identifiers necessary for its stated functionality and security requirements.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.5 Analytics Tools and Device Identifiers</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">Analytics Tools:</strong> No analytics tools have been identified as being used by the application for this policy draft. Any collection of usage analytics or diagnostic information should be disclosed if such tools are implemented.</li>
+                            <li><strong class="text-slate-300">Device Identifiers for Push Notifications:</strong> No collection of device identifiers for push notifications has been confirmed. If push notifications are implemented, the relevant device identifiers and their purposes should be disclosed in this policy.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.6 Device Permissions and Access to Information</h3>
+                        <p class="text-slate-400 mb-2 text-xs sm:text-sm">The application's access to device features and information is described below. The actual permissions requested by the mobile application should be verified before publication.</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                            <li><strong class="text-slate-300">Camera:</strong> No camera access has been identified as necessary for the stated application functions.</li>
+                            <li><strong class="text-slate-300">Microphone:</strong> No microphone access has been identified as necessary for the stated application functions.</li>
+                            <li><strong class="text-slate-300">Location:</strong> No location data collection has been identified as necessary for the stated application functions.</li>
+                            <li><strong class="text-slate-300">Contacts:</strong> No access to the user's contacts has been identified as necessary for the stated application functions.</li>
+                            <li><strong class="text-slate-300">Photos and Files:</strong> No access to the user's photos or files has been identified as necessary for the stated application functions.</li>
+                        </ul>
+                        <p class="mt-2 text-slate-400 text-xs sm:text-sm">
+                            If any of these permissions are required in the current or a future version of the application, the relevant purpose, scope of access, and associated data-handling practices should be disclosed appropriately.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.7 Payment Information</h3>
+                        <p class="text-slate-400">The application is intended for RTIS device monitoring and reporting. No collection or processing of payment details has been identified for the functions described in this policy.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-200 text-sm sm:text-base mb-1">3.8 User Data and Purpose Limitation</h3>
+                        <p class="text-slate-400">
+                            Personal information is processed primarily to authenticate users, manage access, maintain sessions, deliver applicable OTPs and SMS alerts, and support application security and auditing. The collection and processing of personal data should be limited to what is necessary for these purposes, in accordance with applicable organizational policies and legal requirements.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 1 -->
-            <section id="section-1" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">1</span>
-                    <span>Information We Collect</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    We collect information to provide better services to all our users. The types of information we gather include:
+            <!-- 4. Data Sharing and Disclosure -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">4. Data Sharing and Disclosure</h2>
+                <p class="mb-3">
+                    The RTIS application is not intended to share users' personal data with external applications or other internal applications or groups as part of its stated functionality.
                 </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-                        <h5 class="font-semibold text-slate-900 dark:text-white mb-1 flex items-center space-x-2">
-                            <i class="fa-solid fa-user-pen text-indigo-500 text-sm"></i>
-                            <span>Provided Information</span>
-                        </h5>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Account names, email addresses, phone numbers, and billing details submitted during registration or profile setup.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-                        <h5 class="font-semibold text-slate-900 dark:text-white mb-1 flex items-center space-x-2">
-                            <i class="fa-solid fa-laptop-code text-indigo-500 text-sm"></i>
-                            <span>Automatic Logs</span>
-                        </h5>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">IP addresses, browser types, operating system details, time stamps, and referral paths captured seamlessly via site navigation.</p>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 2 -->
-            <section id="section-2" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">2</span>
-                    <span>How We Use Data</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    The data collected is utilized strictly under lawful business standards to ensure optimal operations:
+                <p>
+                    Personal data is processed for the purposes described in this policy and is subject to applicable access controls and organizational security requirements. Any future sharing or disclosure of personal data, if required, should be carried out only where authorized and in accordance with applicable laws, regulations, and CRIS policies. This may include disclosures required by law or by a competent authority.
                 </p>
-                <ul class="space-y-2 text-slate-600 dark:text-slate-300">
-                    <li class="flex items-start space-x-3">
-                        <i class="fa-solid fa-check text-indigo-500 mt-1"></i>
-                        <span>Provision, maintenance, and ongoing enhancement of our digital application features.</span>
-                    </li>
-                    <li class="flex items-start space-x-3">
-                        <i class="fa-solid fa-check text-indigo-500 mt-1"></i>
-                        <span>Processing your direct transactions and transmitting necessary service invoices or notices.</span>
-                    </li>
-                    <li class="flex items-start space-x-3">
-                        <i class="fa-solid fa-check text-indigo-500 mt-1"></i>
-                        <span>Detecting, analyzing, and mitigating potential fraudulent activities or cyber security risks.</span>
-                    </li>
+            </div>
+
+            <!-- 5. Security Safeguards -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">5. Security Safeguards</h2>
+                <p class="mb-3">
+                    CRIS is committed to protecting personal data processed through the RTIS application against unauthorized access, disclosure, alteration, loss, or misuse.
+                </p>
+                <p class="mb-3">
+                    As specified for the application, personal data is stored in encrypted form. Appropriate technical and organizational safeguards should be implemented and maintained to protect personal information throughout its processing lifecycle. These safeguards may include:
+                </p>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-slate-400">
+                    <li>Encryption of stored personal data and, where applicable, data transmitted over networks.</li>
+                    <li>Authentication and access controls to restrict access to authorized users.</li>
+                    <li>Secure session management and protection of authentication mechanisms.</li>
+                    <li>Maintenance and monitoring of relevant security and access logs.</li>
+                    <li>Periodic review of security controls in accordance with applicable CRIS policies.</li>
                 </ul>
-            </section>
-
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 3 -->
-            <section id="section-3" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">3</span>
-                    <span>Cookies & Tracking Technologies</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    We use cookies and similar tracking technologies to track activity on our platform and hold certain analytical data. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
+                <p class="mt-3 text-slate-400 text-xs sm:text-sm">
+                    The implementation of individual safeguards should be consistent with the application's actual technical architecture and approved security practices.
                 </p>
-            </section>
+            </div>
 
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 4 -->
-            <section id="section-4" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">4</span>
-                    <span>Data Sharing & Disclosure</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    We do not rent, sell, or trade personal data to third parties. We may share information only in specific strict scenarios:
+            <!-- 6. Grievance Redressal and Privacy Contact -->
+            <div>
+                <h2 class="text-lg sm:text-xl font-semibold text-white mb-3">6. Grievance Redressal and Privacy Contact</h2>
+                <p class="mb-3">
+                    Please find below the mail id for any data related privacy grievances:
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
-                        <i class="fa-solid fa-gavel text-indigo-500 text-xl mb-2"></i>
-                        <h5 class="font-semibold text-sm mb-1 text-slate-900 dark:text-white">Legal Obligations</h5>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">When mandated by valid subpoenas or local governance courts.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
-                        <i class="fa-solid fa-server text-indigo-500 text-xl mb-2"></i>
-                        <h5 class="font-semibold text-sm mb-1 text-slate-900 dark:text-white">Trusted Vendors</h5>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Cloud infrastructure hosts bound by secure data handling agreements.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
-                        <i class="fa-solid fa-handshake-angle text-indigo-500 text-xl mb-2"></i>
-                        <h5 class="font-semibold text-sm mb-1 text-slate-900 dark:text-white">Business Transfer</h5>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">In the event of a merger, corporate acquisition, or asset sale.</p>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 5 -->
-            <section id="section-5" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">5</span>
-                    <span>Your Privacy Rights</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Depending on your geographic residency (such as GDPR in Europe or CCPA in California), you maintain specific rights regarding your personal records:
-                </p>
-                <ul class="list-disc list-inside space-y-1.5 text-slate-600 dark:text-slate-300 text-sm pl-2">
-                    <li>The right to access, update, or delete the information we have on you.</li>
-                    <li>The right of rectification if any collected profile data is found to be inaccurate.</li>
-                    <li>The right to object to or restrict processing operations of your personal details.</li>
-                    <li>The right to data portability for secure transfer to another provider.</li>
-                </ul>
-            </section>
-
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 6 -->
-            <section id="section-6" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">6</span>
-                    <span>Security Measures</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    The security of your data is paramount to us. We deploy industry-standard SSL encryption protocols, robust firewall protections, and strict access hierarchies to guard your records against unauthorized access, disclosure, or alteration.
-                </p>
-            </section>
-
-            <hr class="border-slate-100 dark:border-slate-800">
-
-            <!-- Section 7 -->
-            <section id="section-7" class="policy-section space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-semibold">7</span>
-                    <span>Contact Information</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    If you have any questions, concerns, or requests regarding this Privacy Policy statement, please contact our Data Protection Officer:
-                </p>
-                <div class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div class="space-y-1">
-                        <h4 class="font-bold text-slate-900 dark:text-white">NexusCorp Privacy Desk</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Email: <a href="mailto:privacy@example.com" class="text-indigo-600 dark:text-indigo-400 underline font-medium">privacy@example.com</a></p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Address: 100 Innovation Drive, Tech City, CA 94016</p>
-                    </div>
-                    <a href="mailto:privacy@example.com" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium text-sm transition-colors shadow-sm inline-flex items-center space-x-2">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Send Inquiry</span>
+                <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 inline-block">
+                    <a href="mailto:dataprivacy.grievances@cris.org.in" class="text-blue-400 hover:underline font-semibold flex items-center space-x-2">
+                        <i class="fa fa-envelope text-amber-400"></i>
+                        <span>dataprivacy.grievances@cris.org.in</span>
                     </a>
                 </div>
-            </section>
+            </div>
 
-        </main>
-    </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 px-4 sm:px-6 lg:px-8 mt-auto transition-colors">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; 2026 NexusCorp. All rights reserved.</p>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms of Service</a>
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Security Overview</a>
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Cookie Settings</a>
-            </div>
-        </div>
+    <footer class="w-full max-w-5xl mx-auto mt-8 pt-4 border-t border-slate-800 text-center text-xs text-slate-500 space-y-1">
+        <p>Copyright &copy; <span th:text="${T(java.time.Year).now()}">2026</span>, Centre For Railway Information Systems. Designed and Hosted by CRIS</p>
+        <p class="font-semibold text-slate-400">Version 2.0.0</p>
     </footer>
 
-    <!-- JavaScript Interactions Logic -->
-    <script>
-        // Dark Mode Toggle Logic
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
-
-        // Check user system or saved preference
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Search Filter Logic for Sections
-        const searchInput = document.getElementById('policySearch');
-        const mobileSearchInput = document.getElementById('mobilePolicySearch');
-        const sections = document.querySelectorAll('.policy-section');
-
-        function filterPolicies(query) {
-            const searchTerm = query.toLowerCase().trim();
-            sections.forEach(section => {
-                const text = section.innerText.toLowerCase();
-                if (text.includes(searchTerm) || searchTerm === '') {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = searchTerm === '' ? 'block' : 'none';
-                }
-            });
-        }
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => filterPolicies(e.target.value));
-        }
-        if (mobileSearchInput) {
-            mobileSearchInput.addEventListener('input', (e) => filterPolicies(e.target.value));
-        }
-
-        // Active Sidebar Link Highlighting on Scroll
-        const tocLinks = document.querySelectorAll('.toc-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            tocLinks.forEach(link => {
-                link.classList.remove('bg-indigo-50', 'dark:bg-slate-800', 'text-indigo-600', 'dark:text-indigo-400', 'font-semibold');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('bg-indigo-50', 'dark:bg-slate-800', 'text-indigo-600', 'dark:text-indigo-400', 'font-semibold');
-                }
-            });
-        });
-
-        // Download Raw Text / Markdown file helper
-        document.getElementById('downloadMarkdown').addEventListener('click', () => {
-            let content = "PRIVACY POLICY - NEXUSCORP\nLast Updated: October 27, 2026\n\n";
-            sections.forEach((sec, idx) => {
-                content += sec.innerText + "\n\n--------------------------------------------------\n\n";
-            });
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'privacy-policy.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        });
-    </script>
 </body>
+
 </html>
